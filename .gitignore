@@ -1,0 +1,5 @@
+# Eclipse Project Files. Dangerous to copy to other PC's #
+.classpath
+.project
+.settings
+/bin/
