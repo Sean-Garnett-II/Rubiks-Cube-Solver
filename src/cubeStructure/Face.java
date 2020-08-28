@@ -78,7 +78,7 @@ public class Face {
 
 	}
 
-	public char getInxed(int r, int c) {
+	public char getIndex(int r, int c) {
 		return this.face[r][c];
 	}
 
