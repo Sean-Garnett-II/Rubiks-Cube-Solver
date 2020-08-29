@@ -1,7 +1,8 @@
 package cubeStructure;
 
-public class RubiksCube {
+// TODO write a way to input a cube state
 
+public class RubiksCube {
 	static Face frontF = new Face('b');
 	static Face rightF = new Face('y');
 	static Face backF = new Face('g');
@@ -115,7 +116,6 @@ public class RubiksCube {
 		tmpBack = backF.getColumn(0);
 		tmpTop = topF.getColumn(2);
 		tmpDown = downF.getColumn(2);
-		
 
 		topF.setColumn(2, tmpBack);
 		topF.invertColumn(2);
