@@ -5,12 +5,13 @@ import java.util.Arrays;
 // TODO need to write a method to input all values of a face
 
 public class Face {
-	private char[][] face = new char[3][3];
+	static final int faceSize = 3;
+	private char[][] face = new char[faceSize][faceSize];
 
 	public Face() {
 		// fills the array with ▆ '\u2586'
-		for (int r = 0; r < this.face.length; r++) {
-			for (int c = 0; c < this.face[0].length; c++) {
+		for (int r = 0; r < faceSize; r++) {
+			for (int c = 0; c < faceSize; c++) {
 				setIndex(r, c, '\u2586');
 			}
 		}
@@ -18,20 +19,17 @@ public class Face {
 
 	public Face(char tmp) {
 		// fills the array with given character
-		for (int r = 0; r < this.face.length; r++) {
-			for (int c = 0; c < this.face[0].length; c++) {
+		for (int r = 0; r < faceSize; r++) {
+			for (int c = 0; c < faceSize; c++) {
 				setIndex(r, c, tmp);
 			}
 		}
-
 	}
 
 	public void printSimple() {
 
-		for (int r = 0; r < this.face.length; r++) {
+		for (int r = 0; r < faceSize; r++) {
 			System.out.println(Arrays.toString(this.face[r]));
-			// System.out.print(this.face[r][c]);
-			// System.out.print(", ");
 		}
 	}
 
@@ -39,7 +37,7 @@ public class Face {
 
 		System.out.println("┌─┬─┬─┐");
 
-		for (int r = 0; r < this.face.length; r++) {
+		for (int r = 0; r < faceSize; r++) {
 			printRow(r);
 			System.out.println();
 
@@ -52,7 +50,7 @@ public class Face {
 	}
 
 	public void printRow(int r) {
-		for (int c = 0; c < this.face[0].length; c++) {
+		for (int c = 0; c < faceSize; c++) {
 			System.out.print("│");
 			System.out.print(this.face[r][c]);
 		}
@@ -69,7 +67,7 @@ public class Face {
 	}
 
 	public void setColumn(int c, char[] tmp) {
-		for (int r = 0; r < this.face.length; r++) {
+		for (int r = 0; r < faceSize; r++) {
 			this.face[r][c] = tmp[r];
 		}
 
@@ -86,7 +84,7 @@ public class Face {
 	public char[] getColumn(int c) {
 		char[] tmp = new char[3];
 
-		for (int r = 0; r < this.face.length; r++) {
+		for (int r = 0; r < faceSize; r++) {
 			tmp[r] = this.face[r][c];
 		}
 
@@ -96,7 +94,7 @@ public class Face {
 	public void invertRow(int r) {
 		char[] tmp = new char[3];
 
-		for (int c = 0; c < this.face[r].length; c++) {
+		for (int c = 0; c < faceSize; c++) {
 			tmp[c] = getRow(r)[2 - c];
 		}
 		setRow(r, tmp);
@@ -105,7 +103,7 @@ public class Face {
 	public void invertColumn(int c) {
 		char[] tmp = new char[3];
 
-		for (int r = 0; r < this.face.length; r++) {
+		for (int r = 0; r < faceSize; r++) {
 			tmp[r] = getColumn(c)[2 - r];
 		}
 		setColumn(c, tmp);
@@ -115,9 +113,9 @@ public class Face {
 	public void rotate() {
 		char[][] tmp = new char[3][3];
 
-		for (int r = 0; r < this.face.length; r++) {
-			for (int c = 0; c < this.face[0].length; c++) {
-				tmp[r][this.face[0].length - 1 - c] = this.face[c][r];
+		for (int r = 0; r < faceSize; r++) {
+			for (int c = 0; c < faceSize; c++) {
+				tmp[r][faceSize - 1 - c] = this.face[c][r];
 			}
 		}
 
@@ -128,9 +126,9 @@ public class Face {
 	public void counterRotate() {
 		char[][] tmp = new char[3][3];
 
-		for (int r = 0; r < this.face.length; r++) {
-			for (int c = 0; c < this.face[0].length; c++) {
-				tmp[this.face.length - 1 - c][r] = this.face[r][c];
+		for (int r = 0; r < faceSize; r++) {
+			for (int c = 0; c < faceSize; c++) {
+				tmp[faceSize - 1 - c][r] = this.face[r][c];
 			}
 		}
 		this.face = tmp;

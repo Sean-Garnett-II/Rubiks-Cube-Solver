@@ -1,5 +1,9 @@
 package cubeStructure;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 // TODO write a way to input a cube state
 
 public class RubiksCube {
@@ -8,7 +12,7 @@ public class RubiksCube {
 	static Face backF = new Face('g');
 	static Face leftF = new Face('w');
 	static Face topF = new Face('o');
-	static Face downF = new Face('p');
+	static Face downF = new Face('r');
 
 	static char[] tmpFront = new char[3];
 	static char[] tmpRight = new char[3];
@@ -21,8 +25,51 @@ public class RubiksCube {
 
 	}
 
-	public static void printCube() {
+	public static void setFace(Face tmpFace) {
 
+		int i = 0; // holds the number of input characters
+		char[] container = new char[9];
+		String tmpString = "";
+
+		System.out.print(
+				"Input the list of characters representing the square's color. Start form the top right of the face: ");
+
+		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));) {
+			while (i < 9) {
+				tmpString = bufferedReader.readLine();
+				tmpString = tmpString.replaceAll("\\s*", "");
+				char[] tmpArray = tmpString.toCharArray();
+
+				try {
+					for (int j = 0; j < tmpArray.length; j++) {
+
+						container[i] = tmpArray[j];
+						i++;
+					}
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("Error: Too many characters entered. Using the first 9 characters.");
+				}
+			}
+
+			i = 0;
+			for (int r = 0; r < Face.faceSize; r++) {
+				for (int c = 0; c < Face.faceSize; c++) {
+					tmpFace.setIndex(r, c, container[i]);
+					i++;
+				}
+			}
+		} catch (
+
+		IOException e) {
+			System.out.println("IO EXPECTION");
+		}
+
+		System.out.println("The entered face is:");
+		tmpFace.printSimple();
+	}
+
+	public static void printCube() {
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		topF.printGrid();
 		System.out.println();
 		System.out.println("┌─┬─┬─┐┌─┬─┬─┐┌─┬─┬─┐┌─┬─┬─┐");
@@ -42,24 +89,7 @@ public class RubiksCube {
 		System.out.println("└─┴─┴─┘└─┴─┴─┘└─┴─┴─┘└─┴─┴─┘");
 		downF.printGrid();
 		System.out.println();
-	}
-
-	public static void setTMPRows(int face, int right, int back, int left, int top, int down) {
-		tmpFront = frontF.getRow(face);
-		tmpRight = rightF.getRow(right);
-		tmpBack = backF.getRow(back);
-		tmpLeft = leftF.getRow(left);
-		tmpTop = topF.getRow(top);
-		tmpDown = downF.getRow(down);
-	}
-
-	public static void setTMPColumns(int face, int right, int back, int left, int top, int down) {
-		tmpFront = frontF.getColumn(face);
-		tmpRight = rightF.getColumn(right);
-		tmpBack = backF.getColumn(back);
-		tmpLeft = leftF.getColumn(left);
-		tmpTop = topF.getColumn(top);
-		tmpDown = downF.getColumn(down);
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 	}
 
 	public static void rotateFront() {
