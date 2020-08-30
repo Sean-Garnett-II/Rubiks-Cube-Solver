@@ -25,6 +25,104 @@ public class RubiksCube {
 
 	}
 
+	public static void setRubiksCube() {
+		String tmpString = "";
+		char tmpChar = ' ';
+		boolean isFrontSet, isRightSet, isBackSet, isLeftSet, isTopSet, isDownSet, done;
+		isFrontSet = isRightSet = isBackSet = isLeftSet = isTopSet = isDownSet = done = false;
+
+		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+
+			do {
+				System.out.println("Please Select a face to set:");
+				System.out.println("Type Exit to Cancel");
+				System.out.println("Front, Right, Back, Left, Top, Down.");
+				tmpString = bufferedReader.readLine();
+				tmpString = tmpString.replaceAll("\\s*", "");
+				tmpChar = Character.toLowerCase(tmpString.charAt(0));
+
+				System.out.println(isFrontSet && isRightSet && isBackSet && isLeftSet && isTopSet && isDownSet);
+
+				switch (tmpChar) {
+				case 'f':
+					setFace(frontF, bufferedReader);
+					isFrontSet = true;
+					break;
+				case 'r':
+					setFace(rightF, bufferedReader);
+					isRightSet = true;
+					break;
+				case 'b':
+					setFace(backF, bufferedReader);
+					isBackSet = true;
+					break;
+				case 'l':
+					setFace(leftF, bufferedReader);
+					isLeftSet = true;
+					break;
+				case 't':
+					setFace(topF, bufferedReader);
+					isTopSet = true;
+					break;
+				case 'd':
+					setFace(downF, bufferedReader);
+					isDownSet = true;
+					break;
+				case 'e':
+					isFrontSet = isRightSet = isBackSet = isLeftSet = isTopSet = isDownSet = done = true;
+					break;
+				case 'c':
+					isFrontSet = isRightSet = isBackSet = isLeftSet = isTopSet = isDownSet = true;
+					break;
+				}
+			} while (done == false);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void setFace(Face tmpFace, BufferedReader tmpBufferedReader) {
+
+		int i = 0; // holds the number of input characters
+		char[] container = new char[9];
+		String tmpString = "";
+
+		System.out.print(
+				"Input the list of characters representing the square's color. Start form the top right of the face: ");
+
+		try {
+			while (i < 9) {
+				tmpString = tmpBufferedReader.readLine();
+				tmpString = tmpString.replaceAll("\\s*", "");
+				char[] tmpArray = tmpString.toCharArray();
+
+				try {
+					for (int j = 0; j < tmpArray.length; j++) {
+						container[i] = tmpArray[j];
+						i++;
+					}
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("Error: Too many characters entered. Using the first 9 characters.");
+				}
+			}
+
+			i = 0;// reset to zero so that we can track the container index
+
+			for (int r = 0; r < Face.faceSize; r++) {
+				for (int c = 0; c < Face.faceSize; c++) {
+					tmpFace.setIndex(r, c, container[i]);
+					i++;
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("IO EXPECTION");
+		}
+
+		System.out.println("The entered face is:");
+		tmpFace.printSimple();
+	}
+
 	public static void setFace(Face tmpFace) {
 
 		int i = 0; // holds the number of input characters
@@ -34,7 +132,7 @@ public class RubiksCube {
 		System.out.print(
 				"Input the list of characters representing the square's color. Start form the top right of the face: ");
 
-		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));) {
+		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
 			while (i < 9) {
 				tmpString = bufferedReader.readLine();
 				tmpString = tmpString.replaceAll("\\s*", "");
@@ -42,7 +140,6 @@ public class RubiksCube {
 
 				try {
 					for (int j = 0; j < tmpArray.length; j++) {
-
 						container[i] = tmpArray[j];
 						i++;
 					}
@@ -51,16 +148,15 @@ public class RubiksCube {
 				}
 			}
 
-			i = 0;
+			i = 0;// reset to zero so that we can track the container index
+
 			for (int r = 0; r < Face.faceSize; r++) {
 				for (int c = 0; c < Face.faceSize; c++) {
 					tmpFace.setIndex(r, c, container[i]);
 					i++;
 				}
 			}
-		} catch (
-
-		IOException e) {
+		} catch (IOException e) {
 			System.out.println("IO EXPECTION");
 		}
 

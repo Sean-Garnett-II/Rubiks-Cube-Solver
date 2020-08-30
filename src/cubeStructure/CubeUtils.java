@@ -38,7 +38,7 @@ public final class CubeUtils {
 	}
 
 	public static void setMoves(String moves) {
-		// \\s* is the regular expression to all white space character, tabs included
+		// \\s* is the regular expression for all white space characters
 		String[] moveList = moves.split("\\s*,\\s*");
 		boolean valid = true;
 
@@ -54,37 +54,51 @@ public final class CubeUtils {
 
 		if (valid == true) {
 			for (int i = 0; i < moveList.length; i++) {
-				if (moveList[i].equalsIgnoreCase("f")) {
+
+				switch (moveList[i]) {
+				case "f":
 					RubiksCube.rotateFront();
-				} else if (moveList[i].equalsIgnoreCase("f'")) {
+					break;
+				case "f'":
 					RubiksCube.iRotateFront();
-				} else if (moveList[i].equalsIgnoreCase("r")) {
+					break;
+				case "r":
 					RubiksCube.rotateRight();
-				} else if (moveList[i].equalsIgnoreCase("r'")) {
+					break;
+				case "r'":
 					RubiksCube.iRotateRight();
-				} else if (moveList[i].equalsIgnoreCase("b")) {
+					break;
+				case "b":
 					RubiksCube.rotateBack();
-				} else if (moveList[i].equalsIgnoreCase("b'")) {
+					break;
+				case "b'":
 					RubiksCube.iRotateBack();
-				} else if (moveList[i].equalsIgnoreCase("l")) {
+					break;
+				case "l":
 					RubiksCube.rotateLeft();
-				} else if (moveList[i].equalsIgnoreCase("l'")) {
+					break;
+				case "l'":
 					RubiksCube.iRotateLeft();
-				} else if (moveList[i].equalsIgnoreCase("t")) {
+					break;
+				case "t":
 					RubiksCube.rotateTop();
-				} else if (moveList[i].equalsIgnoreCase("t'")) {
+					break;
+				case "t'":
 					RubiksCube.iRotateTop();
-				} else if (moveList[i].equalsIgnoreCase("d")) {
+					break;
+				case "d":
 					RubiksCube.rotateDown();
-				} else if (moveList[i].equalsIgnoreCase("d'")) {
+					break;
+				case "d'":
 					RubiksCube.iRotateDown();
+					break;
 				}
 			}
 		}
 	}
 
 	public static void undoMoves(String moves) {
-		// \\s* is the regular expression to all white space character, tabs included
+		// \\s* is the regular expression for all white space characters
 		String[] moveList = moves.split("\\s*,\\s*");
 		boolean valid = true;
 
@@ -101,37 +115,45 @@ public final class CubeUtils {
 		if (valid == true) {
 			for (int i = moveList.length; i > 0; i--) {
 
-				if (moveList[i - 1].equalsIgnoreCase("f")) {
+				switch (moveList[i - 1]) {
+				case "f":
 					RubiksCube.iRotateFront();
-				} else if (moveList[i - 1].equalsIgnoreCase("f'")) {
+					break;
+				case "f'":
 					RubiksCube.rotateFront();
-				} else if (moveList[i - 1].equalsIgnoreCase("r")) {
+					break;
+				case "r":
 					RubiksCube.iRotateRight();
-				} else if (moveList[i - 1].equalsIgnoreCase("r'")) {
+					break;
+				case "r'":
 					RubiksCube.rotateRight();
-				} else if (moveList[i - 1].equalsIgnoreCase("b")) {
+					break;
+				case "b":
 					RubiksCube.iRotateBack();
-				} else if (moveList[i - 1].equalsIgnoreCase("b'")) {
+					break;
+				case "b'":
 					RubiksCube.rotateBack();
-				} else if (moveList[i - 1].equalsIgnoreCase("l")) {
+					break;
+				case "l":
 					RubiksCube.iRotateLeft();
-				} else if (moveList[i - 1].equalsIgnoreCase("l'")) {
+					break;
+				case "l'":
 					RubiksCube.rotateLeft();
-				} else if (moveList[i - 1].equalsIgnoreCase("t")) {
+					break;
+				case "t":
 					RubiksCube.iRotateTop();
-				} else if (moveList[i - 1].equalsIgnoreCase("t'")) {
+					break;
+				case "t'":
 					RubiksCube.rotateTop();
-				} else if (moveList[i - 1].equalsIgnoreCase("d")) {
+					break;
+				case "d":
 					RubiksCube.iRotateDown();
-				} else if (moveList[i - 1].equalsIgnoreCase("d'")) {
+					break;
+				case "d'":
 					RubiksCube.rotateDown();
+					break;
 				}
 			}
 		}
 	}
-
-	public static void inputFace(Face face) {
-
-	}
-
 }
