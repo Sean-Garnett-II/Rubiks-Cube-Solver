@@ -88,18 +88,48 @@ public class RubiksCube {
 			}
 		}
 
+		
+		// THIS IS THE FUNCTION I'M TRYING I ASSUM ALL OTHER FUNCTIONS ARE ALSO BUGGY
+		//
+		//
+		// i, j, k are another type of x, y, z, 
+		// start indexing the cube with the top left corner as 0,0,0
+		// +x is right +z is down +z is into the cube
+		// I reference a face based off of it's home facelet
+		// for example the front face is indexed 1,1,0
+		// rotating a face means that only one of it's coordinates is even hence the z % 2 == 0 (rotating the face is a z axis rotation)
+		// clockwise rotation of the z axis maps:
+		// NEW x = 2 y OLD
+		// NEW y = x OLD
+		// Z = Z
+		//
+		//
+		// the first loop rotates copies the current face to a temp array
+		// each cubie has a number of facelets = 3 - i % 2 - j % 2
+		// here that number is c
+		// diagnostics in the first loop are as follows:
+		// cubicles index -- cubie's c'th facelets pointer information -- pointer information copied to the temp
+		// this loop works as intended and is used as a reference point in the secon loop
+		//
+		//
+		// the second loop updates the cubicles facelets pointer information using the same transformation
+		// the diagnostics in the second loop are as follows:
+		// cubicles index -- cubie's c'th facelets pointer information -- temp file's pointer -- transformed temp files pointer -- updated cubie's c'ths facelts pointer information -- fmp files' transformed information
+		// one of the jumbled set of pointer is from cubie 1,0,0 to 2,1,0
+		// it's second facelet pointer is 1,0,1. 
+		// in the second loop it is referenced from the original cubicle or the temp array with wrong pointer information 0,1,1
+		
+		
 		if (z % 2 == 0) {
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
 					for (int c = 0; c < (3 - i % 2 - j % 2); c++) {
 						System.out.print(i + "" + j + "" + z);
+						
 						System.out.print("	" + cubicles[i][j][z].face[c].getX() + " "
 								+ cubicles[i][j][z].face[c].getY() + " " + cubicles[i][j][z].face[c].getZ());
 
 						tmp[i][j][z] = cubicles[i][j][z];
-						
-						System.out.print("	" + cubicles[i][j][z].face[c].getX() + " "
-								+ cubicles[i][j][z].face[c].getY() + " " + cubicles[i][j][z].face[c].getZ());
 
 						System.out.print("	" + tmp[i][j][z].face[c].getX() + " " + tmp[i][j][z].face[c].getY() + " "
 								+ tmp[i][j][z].face[c].getZ());
@@ -134,7 +164,7 @@ public class RubiksCube {
 						// Actual assignment
 						cubicles[i][j][z] = tmp[j][2 - i][z];
 
-						System.out.print("	" + cubicles[i][j][z].face[c].getX() + " "
+						System.out.print("		" + cubicles[i][j][z].face[c].getX() + " "
 								+ cubicles[i][j][z].face[c].getY() + " " + cubicles[i][j][z].face[c].getZ());
 
 						System.out.print("	" + tmp[j][2 - i][z].face[c].getX() + " " + tmp[j][2 - i][z].face[c].getY()
