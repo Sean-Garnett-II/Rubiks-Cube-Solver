@@ -7,6 +7,7 @@ public class Main {
 
 		RubiksCube.rotate(1, 1, 0);
 		System.out.println();
+		cube.printCube();
 	}
 
 	public static void rotateF(int[][][] thisCube, int x, int y, int z) {

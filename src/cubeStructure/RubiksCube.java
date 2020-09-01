@@ -99,7 +99,7 @@ public class RubiksCube {
 		// for example the front face is indexed 1,1,0
 		// rotating a face means that only one of it's coordinates is even hence the z % 2 == 0 (rotating the face is a z axis rotation)
 		// clockwise rotation of the z axis maps:
-		// NEW x = 2 y OLD
+		// NEW x = 2 - y OLD
 		// NEW y = x OLD
 		// Z = Z
 		//
@@ -114,6 +114,8 @@ public class RubiksCube {
 		//
 		//
 		// the second loop updates the cubicles facelets pointer information using the same transformation
+		// the i1, i2 are again another form of x, y.
+		// They are used to set the pointer variables
 		// the diagnostics in the second loop are as follows:
 		// cubicles index -- cubie's c'th facelets pointer information -- temp file's pointer -- transformed temp files pointer -- updated cubie's c'ths facelts pointer information -- fmp files' transformed information
 		// one of the jumbled set of pointers is from cubicle 1,0,0 (original) to 2,1,0 (transformed)
@@ -164,6 +166,10 @@ public class RubiksCube {
 
 						// Actual assignment
 						cubicles[i][j][z] = tmp[j][2 - i][z];
+						i1 = cubicles[i][j][z].face[c].getX();
+						i2 = cubicles[i][j][z].face[c].getY();
+						cubicles[i][j][z].face[c].setX(2-i2);
+						cubicles[i][j][z].face[c].setY(i1);
 
 						System.out.print("		" + cubicles[i][j][z].face[c].getX() + " "
 								+ cubicles[i][j][z].face[c].getY() + " " + cubicles[i][j][z].face[c].getZ());
