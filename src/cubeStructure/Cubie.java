@@ -1,30 +1,29 @@
 package cubeStructure;
 
 public class Cubie {
-
-	char facelet1, facelet2, facelet3;
-	int fCount;
-
-	public Cubie() {
-		fCount = 0;
+	Facelet[] face;
+	
+	public Cubie(){
+		
 	}
-
-	public Cubie(char color1) {
-		facelet1 = color1;
-		fCount = 1;
+	
+	public Cubie(Facelet face1) {
+		face = new Facelet[1];
+		face[0] = face1;
 	}
+	
+	public Cubie(Facelet face1, Facelet face2) {
+		face = new Facelet[2];
+		face[0] = face1;
+		face[1] = face2;
 
-	public Cubie(char color1, char color2) {
-		facelet1 = color1;
-		facelet2 = color2;
-		fCount = 2;
 	}
-
-	public Cubie(char color1, char color2, char color3) {
-		facelet1 = color1;
-		facelet2 = color2;
-		facelet2 = color3;
-		fCount = 3;
+	
+	public Cubie(Facelet face1, Facelet face2, Facelet face3) {
+		face = new Facelet[3];
+		face[0] = face1;
+		face[1] = face2;
+		face[2] = face3;
 	}
-
+	
 }
