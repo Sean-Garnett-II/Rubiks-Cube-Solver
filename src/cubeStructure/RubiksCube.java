@@ -89,7 +89,7 @@ public class RubiksCube {
 		}
 
 		
-		// THIS IS THE FUNCTION I'M TRYING I ASSUMe ALL OTHER FUNCTIONS ARE ALSO BUGGY
+		// THIS IS THE FUNCTION I'M TRYING I ASSUME ALL OTHER FUNCTIONS ARE ALSO BUGGY
 		//
 		//
 		// i, j, k are another type of x, y, z, 
@@ -105,7 +105,7 @@ public class RubiksCube {
 		//
 		//
 		// the first loop copies the current face to a temp array
-		// each cubie has a number of facelets = 3 - i % 2 - j % 2
+		// each cubie has a number of facelets = 3 - i % 2 - j % 2 -z % 2
 		// here that number is c
 		// diagnostics in the first loop are as follows:
 		// cubicles index -- cubie's c'th facelets pointer information -- pointer information copied to the temp
