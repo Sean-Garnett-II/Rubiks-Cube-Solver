@@ -106,18 +106,19 @@ public class RubiksCube {
 		//
 		// the first loop copies the current face to a temp array
 		// each cubie has a number of facelets = 3 - i % 2 - j % 2 -z % 2
-		// here that number is c
+		// here that number is c and is used to loop over a cubicles facelets
+		//
 		// diagnostics in the first loop are as follows:
 		// cubicles index -- cubie's c'th facelets pointer information -- pointer information copied to the temp
-		// this loop works as intended and is used as a reference point in the secon loop
+		// this loop works as intended and is used as a reference point in the second loop
 		//
 		//
 		// the second loop updates the cubicles facelets pointer information using the same transformation
 		// the diagnostics in the second loop are as follows:
 		// cubicles index -- cubie's c'th facelets pointer information -- temp file's pointer -- transformed temp files pointer -- updated cubie's c'ths facelts pointer information -- fmp files' transformed information
-		// one of the jumbled set of pointer is from cubie 1,0,0 to 2,1,0
+		// one of the jumbled set of pointers is from cubicle 1,0,0 (original) to 2,1,0 (transformed)
 		// it's second facelet pointer is 1,0,1. 
-		// in the second loop it is referenced from the original cubicle or the temp array with wrong pointer information 0,1,1
+		// in the second loop it is referenced from the original cubicle and the temp array with wrong pointer information 0,1,1
 		
 		
 		if (z % 2 == 0) {
