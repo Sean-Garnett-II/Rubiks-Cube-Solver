@@ -5,9 +5,6 @@ public class Main {
 	public static void main(String[] args) {
 		RubiksCube cube = new RubiksCube();
 
-		cube.printCube();
-		System.out.println();
-
 		cube.setCube('z', 'x', 'j', 'v', 'o', 'm');
 		cube.printCube();
 		System.out.println();

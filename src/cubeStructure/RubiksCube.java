@@ -128,18 +128,53 @@ public class RubiksCube {
 	}
 
 	public void setCube(char frontF, char rightF, char backF, char leftF, char topF, char downF) {
+		// sets the Front face
+		for (int j = 0; j < 3; j++) {
+			for (int i = 0; i < 3; i++) {
+				setFace(i, j, 0, 1, 1, 0, frontF);
+			}
+		}
+
+		// sets the Right face
+		for (int k = 0; k < 3; k++) {
+			for (int j = 0; j < 3; j++) {
+				setFace(2, j, k, 2, 1, 1, rightF);
+			}
+		}
+
+		// sets the Left face
+		for (int k = 0; k < 3; k++) {
+			for (int j = 0; j < 3; j++) {
+				setFace(0, j, k, 0, 1, 1, leftF);
+			}
+		}
+
+		// sets the Back face
+		for (int j = 0; j < 3; j++) {
+			for (int i = 0; i < 3; i++) {
+				setFace(i, j, 2, 1, 1, 2, backF);
+			}
+		}
+
 		// sets the top face
 		for (int k = 0; k < 3; k++) {
 			for (int i = 0; i < 3; i++) {
 				setFace(i, 0, k, 1, 0, 1, topF);
 			}
 		}
+
+		// sets the Down face
+		for (int k = 0; k < 3; k++) {
+			for (int i = 0; i < 3; i++) {
+				setFace(i, 2, k, 1, 2, 1, downF);
+			}
+		}
+
 	}
 
 	public void setFace(int i, int j, int k, int x, int y, int z, char color) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
-			if (cubicles[i][j][k].face[c].pointer[0] == x && cubicles[i][j][k].face[c].pointer[1] == y
-					&& cubicles[i][j][k].face[c].pointer[2] == z) {
+			if (checkPointer(i, j, k, x, y, z, c) == true) {
 				cubicles[i][j][k].face[c].setColor(color);
 			}
 		}
@@ -147,10 +182,18 @@ public class RubiksCube {
 
 	public void printFColor(int i, int j, int k, int x, int y, int z) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
-			if (cubicles[i][j][k].face[c].pointer[0] == x && cubicles[i][j][k].face[c].pointer[1] == y
-					&& cubicles[i][j][k].face[c].pointer[2] == z) {
+			if (checkPointer(i, j, k, x, y, z, c) == true) {
 				System.out.print(cubicles[i][j][k].face[c].getColor());
 			}
+		}
+	}
+
+	public boolean checkPointer(int i, int j, int k, int x, int y, int z, int c) {
+		if (cubicles[i][j][k].face[c].pointer[0] == x && cubicles[i][j][k].face[c].pointer[1] == y
+				&& cubicles[i][j][k].face[c].pointer[2] == z) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
