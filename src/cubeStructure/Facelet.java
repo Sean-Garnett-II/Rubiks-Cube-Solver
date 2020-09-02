@@ -2,13 +2,14 @@ package cubeStructure;
 
 public class Facelet {
 	char color;
-	int x, y, z;
+	int[] pointer = new int[3];
 
 	public Facelet(char color, int x, int y, int z) {
 		this.color = color;
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this.pointer[0] = x;
+		this.pointer[1] = y;
+		this.pointer[2] = z;
+
 	}
 
 	public char getColor() {
@@ -18,31 +19,5 @@ public class Facelet {
 	public void setColor(char color) {
 		this.color = color;
 	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getZ() {
-		return z;
-	}
-
-	public void setZ(int z) {
-		this.z = z;
-	}
-	
-	
 
 }

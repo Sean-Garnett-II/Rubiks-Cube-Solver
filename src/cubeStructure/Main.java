@@ -3,11 +3,7 @@ package cubeStructure;
 public class Main {
 
 	public static void main(String[] args) {
-		RubiksCube cube = new RubiksCube();
-
-		RubiksCube.rotate(1, 1, 0);
-		System.out.println();
-		cube.printCube();
+		System.out.println(RubiksCube.cubicles[0][0][0].face[0].color);
 	}
 
 	public static void rotateF(int[][][] thisCube, int x, int y, int z) {
