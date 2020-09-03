@@ -48,20 +48,87 @@ public class RubiksCube {
 		}
 	}
 
-	public static void rotate(int x, int y, int z) {
+	public static void rotate(int x, int y, int z, int orientation) {
+		// rotates a face given its home plate coordiantes.
+		// the rotation follows positive orientation for the cube (think right hand
+		// rule)
+		// +1 for positive rotation orientation
+		// -1 for negative rotation orientation
+		// Method steps
+		// 1. copy face cubicles
+		// 2. update facelet pointers to their destination
+		// 3. move cubicles
 
-		Cubie[][] tmpCubie = new Cubie[3][3];
-		int tmpX, tmpY, tmpZ;
+		Cubie[][] tmpCubicle = new Cubie[3][3];
+		int tmpX, tmpY, tmpZ, wght1, wght2;
+
+		switch (orientation) {
+		case 1:
+			wght1 = 0;
+			wght2 = 2;
+			break;
+		case -1:
+			wght1 = 2;
+			wght2 = 0;
+			break;
+		default:
+			return;
+		}
+
+		if (x % 2 == 0) {
+			for (int k = 0; k < 3; k++) {
+				for (int j = 0; j < 3; j++) {
+					tmpCubicle[j][k] = cubicles[x][j][k];
+				}
+			}
+
+			for (int k = 0; k < 3; k++) {
+				for (int j = 0; j < 3; j++) {
+
+					for (int c = 0; c < (3 - j % 2 - k % 2); c++) {
+						tmpY = cubicles[x][j][k].face[c].pointer[1];
+						tmpZ = cubicles[x][j][k].face[c].pointer[2];
+
+						cubicles[x][j][k].face[c].pointer[1] = Math.abs(2 - wght1 - tmpZ);
+						cubicles[x][j][k].face[c].pointer[2] = Math.abs(2 - wght2 - tmpY);
+
+					}
+
+					cubicles[x][j][k] = tmpCubicle[Math.abs(2 - wght2 - k)][Math.abs(2 - wght1 - j)];
+				}
+			}
+		}
+
+		if (y % 2 == 0) {
+			for (int k = 0; k < 3; k++) {
+				for (int i = 0; i < 3; i++) {
+					tmpCubicle[i][k] = cubicles[i][y][k];
+				}
+			}
+
+			for (int k = 0; k < 3; k++) {
+				for (int i = 0; i < 3; i++) {
+
+					for (int c = 0; c < (3 - i % 2 - k % 2); c++) {
+						tmpX = cubicles[i][y][k].face[c].pointer[0];
+						tmpZ = cubicles[i][y][k].face[c].pointer[2];
+
+						cubicles[i][y][k].face[c].pointer[0] = Math.abs(2 - wght2 - tmpZ);
+						cubicles[i][y][k].face[c].pointer[2] = Math.abs(2 - wght1 - tmpX);
+					}
+
+					cubicles[i][y][k] = tmpCubicle[Math.abs(2 - wght1 - k)][Math.abs(2 - wght2 - i)];
+				}
+			}
+		}
 
 		if (z % 2 == 0) {
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
-					tmpCubie[i][j] = cubicles[i][j][z];
+					tmpCubicle[i][j] = cubicles[i][j][z];
 				}
 			}
 
-			// First it updates the facelet pointers, then it rotates the cubies in the
-			// cubicle array
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
 
@@ -69,13 +136,11 @@ public class RubiksCube {
 						tmpX = cubicles[i][j][z].face[c].pointer[0];
 						tmpY = cubicles[i][j][z].face[c].pointer[1];
 
-						cubicles[i][j][z].face[c].pointer[0] = 2 - tmpY;
-						cubicles[i][j][z].face[c].pointer[1] = tmpX;
-
+						cubicles[i][j][z].face[c].pointer[0] = Math.abs(2 - wght1 - tmpY);
+						cubicles[i][j][z].face[c].pointer[1] = Math.abs(2 - wght2 - tmpX);
 					}
 
-					cubicles[i][j][z] = tmpCubie[j][2 - i];
-
+					cubicles[i][j][z] = tmpCubicle[Math.abs(2 - wght2 - j)][Math.abs(2 - wght1 - i)];
 				}
 			}
 		}
