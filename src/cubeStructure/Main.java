@@ -8,7 +8,7 @@ public class Main {
 		cube.setCube('f', 'r', 'b', 'l', 't', 'd');
 		cube.printCube();
 		System.out.println();
-		RubiksCube.rotate(1, 0, 1, 1);
+		RubiksCube.move("f", -1);
 		cube.printCube();
 
 

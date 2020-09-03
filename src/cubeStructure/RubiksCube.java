@@ -48,6 +48,45 @@ public class RubiksCube {
 		}
 	}
 
+	public static void move(String moves, int orientation) {
+		String[] moveList = moves.split("\\s*,\\s*");
+
+		for (int i = 0; i < moveList.length; i++) {
+			int tmp1 = 0;
+			int tmp2 = 0;
+
+			if (moveList[i].length() == 1) {
+				tmp1 = 1 * orientation;
+				tmp2 = -1 * orientation;
+			} else if (moveList[i].length() == 2) {
+				tmp1 = -1 * orientation;
+				tmp2 = 1 * orientation;
+			}
+
+			switch (moveList[i].charAt(0)) {
+			case 'f':
+				rotate(1, 1, 0, tmp1);
+				break;
+			case 'r':
+				rotate(2, 1, 1, tmp2);
+				break;
+			case 'b':
+				rotate(1, 1, 2, tmp2);
+				break;
+			case 'l':
+				rotate(0, 1, 1, tmp1);
+				break;
+			case 't':
+				rotate(1, 0, 1, tmp1);
+				break;
+			case 'd':
+				rotate(1, 2, 1, tmp2);
+			}
+
+		}
+
+	}
+
 	public static void rotate(int x, int y, int z, int orientation) {
 		// rotates a face given its home plate coordiantes.
 		// the rotation follows positive orientation for the cube (think right hand
@@ -55,9 +94,10 @@ public class RubiksCube {
 		// +1 for positive rotation orientation
 		// -1 for negative rotation orientation
 		// Method steps
-		// 1. copy face cubicles
-		// 2. update facelet pointers to their destination
-		// 3. move cubicles
+		// 1. determine the type of rotation
+		// 2. copy face cubicles
+		// 3. update facelet pointers to their destination
+		// 4. move cubicles
 
 		Cubie[][] tmpCubicle = new Cubie[3][3];
 		int tmpX, tmpY, tmpZ, wght1, wght2;
