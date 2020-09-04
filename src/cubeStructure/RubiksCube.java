@@ -92,59 +92,61 @@ public class RubiksCube {
 
 	}
 
-	public static void printFace(int x, int y, int z) {
-
-		int i = x;
-		int j = y;
-		int k = z;
-		int xWght = 0;
-		int zWght = 0;
-		int count = 0;
-
-		for (int zc = 0; zc < 3; zc++) {
-			if (z == 1 && zc == 0) {
-				if (z == x + y) {
-					zWght = 2;
+	public static void printFace(char face) {
+		switch (face) {
+		case 'f':
+			for (int j = 0; j < 3; j++) {
+				for (int i = 0; i < 3; i++) {
+					printFaceletColor(i, j, 0, 1, 1, 0);
 				}
-				k = zWght;
+				System.out.println();
 			}
+			break;
 
-			for (int yc = 0; yc < 3; yc++) {
-				if (y == 1 && yc == 0) {
-					j = 0;
+		case 'r':
+			for (int j = 0; j < 3; j++) {
+				for (int k = 0; k < 3; k++) {
+					printFaceletColor(2, j, k, 2, 1, 1);
 				}
+				System.out.println();
+			}
+			break;
 
-				for (int xc = 0; xc < 3; xc++) {
-					if (x == 1 && xc == 0) {
-						if (x < z) {
-							xWght = 2;
-						}
-						i = xWght;
-					}
-					System.out.print(i);
-					System.out.print(j);
-					System.out.print(k);
-					printFaceletColor(i, j, k, x, y, z);
-
-					if (x == 1) {
-
-						i += (xWght - 1) / (-1);
-					}
+		case 'b':
+			for (int j = 0; j < 3; j++) {
+				for (int i = 2; i > 0 - 1; i--) {
+					printFaceletColor(i, j, 2, 1, 1, 2);
 				}
+				System.out.println();
+			}
+			break;
 
-				if (y == 1) {
-					j++;
+		case 'l':
+			for (int j = 0; j < 3; j++) {
+				for (int k = 2; k > 0 - 1; k--) {
+					printFaceletColor(0, j, k, 0, 1, 1);
 				}
-
+				System.out.println();
 			}
+			break;
 
-			if (y == 1) {
-				j++;
+		case 't':
+			for (int k = 2; k > -1; k--) {
+				for (int i = 0; i < 3; i++) {
+					printFaceletColor(i, 0, k, 1, 0, 1);
+				}
+				System.out.println();
 			}
+			break;
 
-			if (z == 1) {
-				k += (zWght - 1) / (-1);
+		case 'd':
+			for (int k = 0; k < 3; k++) {
+				for (int i = 0; i < 3; i++) {
+					printFaceletColor(i, 2, k, 1, 2, 1);
+				}
+				System.out.println();
 			}
+			break;
 
 		}
 
@@ -253,12 +255,7 @@ public class RubiksCube {
 	public void printCube() {
 
 		// prints the top face
-		for (int k = 2; k > -1; k--) {
-			for (int i = 0; i < 3; i++) {
-				printFaceletColor(i, 0, k, 1, 0, 1);
-			}
-			System.out.println();
-		}
+		printFace('t');
 		System.out.println();
 
 		// prints the Rows in order: Front Right Back Left
@@ -287,12 +284,7 @@ public class RubiksCube {
 		System.out.println();
 
 		// prints the Down (bottom) face
-		for (int k = 0; k < 3; k++) {
-			for (int i = 0; i < 3; i++) {
-				printFaceletColor(i, 2, k, 1, 2, 1);
-			}
-			System.out.println();
-		}
+		printFace('d');
 	}
 
 	public void setCube(char frontF, char rightF, char backF, char leftF, char topF, char downF) {
