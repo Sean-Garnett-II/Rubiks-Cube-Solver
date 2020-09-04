@@ -49,18 +49,23 @@ public class RubiksCube {
 	}
 
 	public static void move(String moves, int orientation) {
-		String[] moveList = moves.split("\\s*,\\s*");
+		// orientation 1 does the moves as given
+		// orientation -1 undoes the moves
+
+		String[] moveList = moves.split("\\s");
+		int tmp1 = 0;
+		int tmp2 = 0;
 
 		for (int i = 0; i < moveList.length; i++) {
-			int tmp1 = 0;
-			int tmp2 = 0;
 
 			if (moveList[i].length() == 1) {
 				tmp1 = 1 * orientation;
 				tmp2 = -1 * orientation;
-			} else if (moveList[i].length() == 2) {
+			} else if (moveList[i].length() == 2 && moveList[i].charAt(1) == '\'') {
 				tmp1 = -1 * orientation;
 				tmp2 = 1 * orientation;
+			} else {
+				return;
 			}
 
 			switch (moveList[i].charAt(0)) {
@@ -81,6 +86,64 @@ public class RubiksCube {
 				break;
 			case 'd':
 				rotate(1, 2, 1, tmp2);
+			}
+
+		}
+
+	}
+
+	public static void printFace(int x, int y, int z) {
+
+		int i = x;
+		int j = y;
+		int k = z;
+		int xWght = 0;
+		int zWght = 0;
+		int count = 0;
+
+		for (int zc = 0; zc < 3; zc++) {
+			if (z == 1 && zc == 0) {
+				if (z == x + y) {
+					zWght = 2;
+				}
+				k = zWght;
+			}
+
+			for (int yc = 0; yc < 3; yc++) {
+				if (y == 1 && yc == 0) {
+					j = 0;
+				}
+
+				for (int xc = 0; xc < 3; xc++) {
+					if (x == 1 && xc == 0) {
+						if (x < z) {
+							xWght = 2;
+						}
+						i = xWght;
+					}
+					System.out.print(i);
+					System.out.print(j);
+					System.out.print(k);
+					printFaceletColor(i, j, k, x, y, z);
+
+					if (x == 1) {
+
+						i += (xWght - 1) / (-1);
+					}
+				}
+
+				if (y == 1) {
+					j++;
+				}
+
+			}
+
+			if (y == 1) {
+				j++;
+			}
+
+			if (z == 1) {
+				k += (zWght - 1) / (-1);
 			}
 
 		}
@@ -192,7 +255,7 @@ public class RubiksCube {
 		// prints the top face
 		for (int k = 2; k > -1; k--) {
 			for (int i = 0; i < 3; i++) {
-				printFColor(i, 0, k, 1, 0, 1);
+				printFaceletColor(i, 0, k, 1, 0, 1);
 			}
 			System.out.println();
 		}
@@ -202,22 +265,22 @@ public class RubiksCube {
 		for (int j = 0; j < 3; j++) {
 
 			for (int i = 0; i < 3; i++) {
-				printFColor(i, j, 0, 1, 1, 0);
+				printFaceletColor(i, j, 0, 1, 1, 0);
 			}
 			System.out.print(" ");
 
 			for (int k = 0; k < 3; k++) {
-				printFColor(2, j, k, 2, 1, 1);
+				printFaceletColor(2, j, k, 2, 1, 1);
 			}
 			System.out.print(" ");
 
 			for (int i = 2; i > 0 - 1; i--) {
-				printFColor(i, j, 2, 1, 1, 2);
+				printFaceletColor(i, j, 2, 1, 1, 2);
 			}
 			System.out.print(" ");
 
 			for (int k = 2; k > 0 - 1; k--) {
-				printFColor(0, j, k, 0, 1, 1);
+				printFaceletColor(0, j, k, 0, 1, 1);
 			}
 			System.out.println();
 		}
@@ -226,7 +289,7 @@ public class RubiksCube {
 		// prints the Down (bottom) face
 		for (int k = 0; k < 3; k++) {
 			for (int i = 0; i < 3; i++) {
-				printFColor(i, 2, k, 1, 2, 1);
+				printFaceletColor(i, 2, k, 1, 2, 1);
 			}
 			System.out.println();
 		}
@@ -277,7 +340,7 @@ public class RubiksCube {
 
 	}
 
-	public void setFace(int i, int j, int k, int x, int y, int z, char color) {
+	public static void setFace(int i, int j, int k, int x, int y, int z, char color) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
 			if (checkPointer(i, j, k, x, y, z, c) == true) {
 				cubicles[i][j][k].face[c].setColor(color);
@@ -285,7 +348,7 @@ public class RubiksCube {
 		}
 	}
 
-	public void printFColor(int i, int j, int k, int x, int y, int z) {
+	public static void printFaceletColor(int i, int j, int k, int x, int y, int z) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
 			if (checkPointer(i, j, k, x, y, z, c) == true) {
 				System.out.print(cubicles[i][j][k].face[c].getColor());
@@ -293,7 +356,7 @@ public class RubiksCube {
 		}
 	}
 
-	public boolean checkPointer(int i, int j, int k, int x, int y, int z, int c) {
+	public static boolean checkPointer(int i, int j, int k, int x, int y, int z, int c) {
 		if (cubicles[i][j][k].face[c].pointer[0] == x && cubicles[i][j][k].face[c].pointer[1] == y
 				&& cubicles[i][j][k].face[c].pointer[2] == z) {
 			return true;
