@@ -13,7 +13,7 @@ public class Facelet {
 	}
 
 	public char getColor() {
-		return color;
+		return this.color;
 	}
 
 	public void setColor(char color) {

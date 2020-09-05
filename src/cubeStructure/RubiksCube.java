@@ -92,66 +92,6 @@ public class RubiksCube {
 
 	}
 
-	public static void printFace(char face) {
-		switch (face) {
-		case 'f':
-			for (int j = 0; j < 3; j++) {
-				for (int i = 0; i < 3; i++) {
-					printFaceletColor(i, j, 0, 1, 1, 0);
-				}
-				System.out.println();
-			}
-			break;
-
-		case 'r':
-			for (int j = 0; j < 3; j++) {
-				for (int k = 0; k < 3; k++) {
-					printFaceletColor(2, j, k, 2, 1, 1);
-				}
-				System.out.println();
-			}
-			break;
-
-		case 'b':
-			for (int j = 0; j < 3; j++) {
-				for (int i = 2; i > 0 - 1; i--) {
-					printFaceletColor(i, j, 2, 1, 1, 2);
-				}
-				System.out.println();
-			}
-			break;
-
-		case 'l':
-			for (int j = 0; j < 3; j++) {
-				for (int k = 2; k > 0 - 1; k--) {
-					printFaceletColor(0, j, k, 0, 1, 1);
-				}
-				System.out.println();
-			}
-			break;
-
-		case 't':
-			for (int k = 2; k > -1; k--) {
-				for (int i = 0; i < 3; i++) {
-					printFaceletColor(i, 0, k, 1, 0, 1);
-				}
-				System.out.println();
-			}
-			break;
-
-		case 'd':
-			for (int k = 0; k < 3; k++) {
-				for (int i = 0; i < 3; i++) {
-					printFaceletColor(i, 2, k, 1, 2, 1);
-				}
-				System.out.println();
-			}
-			break;
-
-		}
-
-	}
-
 	public static void rotate(int x, int y, int z, int orientation) {
 		// rotates a face given its home plate coordiantes.
 		// the rotation follows positive orientation for the cube (think right hand
@@ -252,42 +192,7 @@ public class RubiksCube {
 
 	}
 
-	public void printCube() {
-
-		// prints the top face
-		printFace('t');
-		System.out.println();
-
-		// prints the Rows in order: Front Right Back Left
-		for (int j = 0; j < 3; j++) {
-
-			for (int i = 0; i < 3; i++) {
-				printFaceletColor(i, j, 0, 1, 1, 0);
-			}
-			System.out.print(" ");
-
-			for (int k = 0; k < 3; k++) {
-				printFaceletColor(2, j, k, 2, 1, 1);
-			}
-			System.out.print(" ");
-
-			for (int i = 2; i > 0 - 1; i--) {
-				printFaceletColor(i, j, 2, 1, 1, 2);
-			}
-			System.out.print(" ");
-
-			for (int k = 2; k > 0 - 1; k--) {
-				printFaceletColor(0, j, k, 0, 1, 1);
-			}
-			System.out.println();
-		}
-		System.out.println();
-
-		// prints the Down (bottom) face
-		printFace('d');
-	}
-
-	public void setCube(char frontF, char rightF, char backF, char leftF, char topF, char downF) {
+	public static void setCube(char frontF, char rightF, char backF, char leftF, char topF, char downF) {
 
 		for (int j = 0; j < 3; j++) {
 			for (int i = 0; i < 3; i++) {
@@ -333,6 +238,101 @@ public class RubiksCube {
 				cubicles[i][j][k].facelet[c].setColor(color);
 			}
 		}
+	}
+	
+	public static void printCube() {
+
+		// prints the top face
+		printFace('t');
+		System.out.println();
+
+		// prints the Rows in order: Front Right Back Left
+		for (int j = 0; j < 3; j++) {
+
+			for (int i = 0; i < 3; i++) {
+				printFaceletColor(i, j, 0, 1, 1, 0);
+			}
+			System.out.print(" ");
+
+			for (int k = 0; k < 3; k++) {
+				printFaceletColor(2, j, k, 2, 1, 1);
+			}
+			System.out.print(" ");
+
+			for (int i = 2; i > 0 - 1; i--) {
+				printFaceletColor(i, j, 2, 1, 1, 2);
+			}
+			System.out.print(" ");
+
+			for (int k = 2; k > 0 - 1; k--) {
+				printFaceletColor(0, j, k, 0, 1, 1);
+			}
+			System.out.println();
+		}
+		System.out.println();
+
+		// prints the Down (bottom) face
+		printFace('d');
+	}
+	
+	public static void printFace(char face) {
+		switch (face) {
+		case 'f':
+			for (int j = 0; j < 3; j++) {
+				for (int i = 0; i < 3; i++) {
+					printFaceletColor(i, j, 0, 1, 1, 0);
+				}
+				System.out.println();
+			}
+			break;
+
+		case 'r':
+			for (int j = 0; j < 3; j++) {
+				for (int k = 0; k < 3; k++) {
+					printFaceletColor(2, j, k, 2, 1, 1);
+				}
+				System.out.println();
+			}
+			break;
+
+		case 'b':
+			for (int j = 0; j < 3; j++) {
+				for (int i = 2; i > 0 - 1; i--) {
+					printFaceletColor(i, j, 2, 1, 1, 2);
+				}
+				System.out.println();
+			}
+			break;
+
+		case 'l':
+			for (int j = 0; j < 3; j++) {
+				for (int k = 2; k > 0 - 1; k--) {
+					printFaceletColor(0, j, k, 0, 1, 1);
+				}
+				System.out.println();
+			}
+			break;
+
+		case 't':
+			for (int k = 2; k > -1; k--) {
+				for (int i = 0; i < 3; i++) {
+					printFaceletColor(i, 0, k, 1, 0, 1);
+				}
+				System.out.println();
+			}
+			break;
+
+		case 'd':
+			for (int k = 0; k < 3; k++) {
+				for (int i = 0; i < 3; i++) {
+					printFaceletColor(i, 2, k, 1, 2, 1);
+				}
+				System.out.println();
+			}
+			break;
+
+		}
+
 	}
 
 	public static void printFaceletColor(int i, int j, int k, int x, int y, int z) {
