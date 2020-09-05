@@ -1,4 +1,5 @@
 package cubeStructure;
+
 import java.util.*;
 
 public class Main {
@@ -7,20 +8,11 @@ public class Main {
 		RubiksCube cube = new RubiksCube();
 
 		cube.setCube('f', 'r', 'b', 'l', 't', 'd');
-		cube.printCube();
-		System.out.println();
 
-		System.out.println();
-		RubiksCube.move("f r" , 1);
-		cube.printCube();
-		int[] array = CubeUtils.findCubie('d');
-		
-System.out.println(Arrays.toString(array));
+		int[] array = CubeUtils.findCubie('t', 'r');
 
+		System.out.println(Arrays.toString(array));
 
-
-
-		
 	}
 
 }

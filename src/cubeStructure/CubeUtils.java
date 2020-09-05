@@ -21,8 +21,27 @@ public class CubeUtils {
 
 	}
 
+	public static int[] findCubie(char color1, char color2) {
+		if (checkFacelet(1, 0, 0, 0, color1, color2) && checkFacelet(1, 0, 0, 1, color1, color2)) {
+			return new int[] { 1, 0, 0 };
+		} else if (checkFacelet(2, 1, 0, 0, color1, color2) && checkFacelet(2, 1, 0, 1, color1, color2)) {
+			return new int[] { 2, 1, 0 };
+		} else
+			return new int[] {};
+
+	}
+
 	public static boolean checkFacelet(int i, int j, int k, int c, char color) {
 		if (RubiksCube.cubicles[i][j][k].face[c].getColor() == color) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public static boolean checkFacelet(int i, int j, int k, int c, char color1, char color2) {
+		if (checkFacelet(i, j, k, c, color1) || checkFacelet(i, j, k, c, color2)) {
 			return true;
 		} else {
 			return false;
