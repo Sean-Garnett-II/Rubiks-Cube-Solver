@@ -9,7 +9,7 @@ public class Main {
 
 		cube.setCube('f', 'r', 'b', 'l', 't', 'd');
 
-		int[] array = CubeUtils.findCubie('t', 'r');
+		int[] array = CubeUtils.findCubie('f', 'r');
 
 		System.out.println(Arrays.toString(array));
 

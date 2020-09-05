@@ -191,11 +191,11 @@ public class RubiksCube {
 				for (int j = 0; j < 3; j++) {
 
 					for (int c = 0; c < (3 - j % 2 - k % 2); c++) {
-						tmpY = cubicles[x][j][k].face[c].pointer[1];
-						tmpZ = cubicles[x][j][k].face[c].pointer[2];
+						tmpY = cubicles[x][j][k].facelet[c].pointer[1];
+						tmpZ = cubicles[x][j][k].facelet[c].pointer[2];
 
-						cubicles[x][j][k].face[c].pointer[1] = Math.abs(2 - wght1 - tmpZ);
-						cubicles[x][j][k].face[c].pointer[2] = Math.abs(2 - wght2 - tmpY);
+						cubicles[x][j][k].facelet[c].pointer[1] = Math.abs(2 - wght1 - tmpZ);
+						cubicles[x][j][k].facelet[c].pointer[2] = Math.abs(2 - wght2 - tmpY);
 
 					}
 
@@ -215,11 +215,11 @@ public class RubiksCube {
 				for (int i = 0; i < 3; i++) {
 
 					for (int c = 0; c < (3 - i % 2 - k % 2); c++) {
-						tmpX = cubicles[i][y][k].face[c].pointer[0];
-						tmpZ = cubicles[i][y][k].face[c].pointer[2];
+						tmpX = cubicles[i][y][k].facelet[c].pointer[0];
+						tmpZ = cubicles[i][y][k].facelet[c].pointer[2];
 
-						cubicles[i][y][k].face[c].pointer[0] = Math.abs(2 - wght2 - tmpZ);
-						cubicles[i][y][k].face[c].pointer[2] = Math.abs(2 - wght1 - tmpX);
+						cubicles[i][y][k].facelet[c].pointer[0] = Math.abs(2 - wght2 - tmpZ);
+						cubicles[i][y][k].facelet[c].pointer[2] = Math.abs(2 - wght1 - tmpX);
 					}
 
 					cubicles[i][y][k] = tmpCubicle[Math.abs(2 - wght1 - k)][Math.abs(2 - wght2 - i)];
@@ -238,11 +238,11 @@ public class RubiksCube {
 				for (int i = 0; i < 3; i++) {
 
 					for (int c = 0; c < (3 - i % 2 - j % 2); c++) {
-						tmpX = cubicles[i][j][z].face[c].pointer[0];
-						tmpY = cubicles[i][j][z].face[c].pointer[1];
+						tmpX = cubicles[i][j][z].facelet[c].pointer[0];
+						tmpY = cubicles[i][j][z].facelet[c].pointer[1];
 
-						cubicles[i][j][z].face[c].pointer[0] = Math.abs(2 - wght1 - tmpY);
-						cubicles[i][j][z].face[c].pointer[1] = Math.abs(2 - wght2 - tmpX);
+						cubicles[i][j][z].facelet[c].pointer[0] = Math.abs(2 - wght1 - tmpY);
+						cubicles[i][j][z].facelet[c].pointer[1] = Math.abs(2 - wght2 - tmpX);
 					}
 
 					cubicles[i][j][z] = tmpCubicle[Math.abs(2 - wght2 - j)][Math.abs(2 - wght1 - i)];
@@ -288,42 +288,37 @@ public class RubiksCube {
 	}
 
 	public void setCube(char frontF, char rightF, char backF, char leftF, char topF, char downF) {
-		// sets the Front face
+
 		for (int j = 0; j < 3; j++) {
 			for (int i = 0; i < 3; i++) {
 				setFace(i, j, 0, 1, 1, 0, frontF);
 			}
 		}
 
-		// sets the Right face
 		for (int k = 0; k < 3; k++) {
 			for (int j = 0; j < 3; j++) {
 				setFace(2, j, k, 2, 1, 1, rightF);
 			}
 		}
 
-		// sets the Left face
 		for (int k = 0; k < 3; k++) {
 			for (int j = 0; j < 3; j++) {
 				setFace(0, j, k, 0, 1, 1, leftF);
 			}
 		}
 
-		// sets the Back face
 		for (int j = 0; j < 3; j++) {
 			for (int i = 0; i < 3; i++) {
 				setFace(i, j, 2, 1, 1, 2, backF);
 			}
 		}
 
-		// sets the top face
 		for (int k = 0; k < 3; k++) {
 			for (int i = 0; i < 3; i++) {
 				setFace(i, 0, k, 1, 0, 1, topF);
 			}
 		}
 
-		// sets the Down face
 		for (int k = 0; k < 3; k++) {
 			for (int i = 0; i < 3; i++) {
 				setFace(i, 2, k, 1, 2, 1, downF);
@@ -335,7 +330,7 @@ public class RubiksCube {
 	public static void setFace(int i, int j, int k, int x, int y, int z, char color) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
 			if (CubeUtils.checkPointer(i, j, k, x, y, z, c) == true) {
-				cubicles[i][j][k].face[c].setColor(color);
+				cubicles[i][j][k].facelet[c].setColor(color);
 			}
 		}
 	}
@@ -343,10 +338,9 @@ public class RubiksCube {
 	public static void printFaceletColor(int i, int j, int k, int x, int y, int z) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
 			if (CubeUtils.checkPointer(i, j, k, x, y, z, c) == true) {
-				System.out.print(cubicles[i][j][k].face[c].getColor());
+				System.out.print(cubicles[i][j][k].facelet[c].getColor());
 			}
 		}
 	}
-
 
 }
