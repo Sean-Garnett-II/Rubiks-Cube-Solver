@@ -334,7 +334,7 @@ public class RubiksCube {
 
 	public static void setFace(int i, int j, int k, int x, int y, int z, char color) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
-			if (checkPointer(i, j, k, x, y, z, c) == true) {
+			if (CubeUtils.checkPointer(i, j, k, x, y, z, c) == true) {
 				cubicles[i][j][k].face[c].setColor(color);
 			}
 		}
@@ -342,18 +342,11 @@ public class RubiksCube {
 
 	public static void printFaceletColor(int i, int j, int k, int x, int y, int z) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
-			if (checkPointer(i, j, k, x, y, z, c) == true) {
+			if (CubeUtils.checkPointer(i, j, k, x, y, z, c) == true) {
 				System.out.print(cubicles[i][j][k].face[c].getColor());
 			}
 		}
 	}
 
-	public static boolean checkPointer(int i, int j, int k, int x, int y, int z, int c) {
-		if (cubicles[i][j][k].face[c].pointer[0] == x && cubicles[i][j][k].face[c].pointer[1] == y
-				&& cubicles[i][j][k].face[c].pointer[2] == z) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+
 }

@@ -1,4 +1,5 @@
 package cubeStructure;
+import java.util.*;
 
 public class Main {
 
@@ -12,12 +13,14 @@ public class Main {
 		System.out.println();
 		RubiksCube.move("f r" , 1);
 		cube.printCube();
-
+		int[] array = CubeUtils.findCubie('d');
+		
+System.out.println(Arrays.toString(array));
 
 
 
 
 		
 	}
-	
+
 }
