@@ -81,7 +81,7 @@ public class RubiksCube {
 			case 'l':
 				rotate(0, 1, 1, tmp1);
 				break;
-			case 't':
+			case 'u':
 				rotate(1, 0, 1, tmp1);
 				break;
 			case 'd':
@@ -92,7 +92,7 @@ public class RubiksCube {
 
 	}
 
-	public static void rotate(int x, int y, int z, int orientation) {
+	private static void rotate(int x, int y, int z, int orientation) {
 		// rotates a face given its home plate coordiantes.
 		// the rotation follows positive orientation for the cube (think right hand
 		// rule)
@@ -196,46 +196,46 @@ public class RubiksCube {
 
 		for (int j = 0; j < 3; j++) {
 			for (int i = 0; i < 3; i++) {
-				setCubie(i, j, 0, 1, 1, 0, frontF);
+				setCubie(cubicles[i][j][0], 1, 1, 0, frontF);
 			}
 		}
 
 		for (int k = 0; k < 3; k++) {
 			for (int j = 0; j < 3; j++) {
-				setCubie(2, j, k, 2, 1, 1, rightF);
+				setCubie(cubicles[2][j][k], 2, 1, 1, rightF);
 			}
 		}
 
 		for (int k = 0; k < 3; k++) {
 			for (int j = 0; j < 3; j++) {
-				setCubie(0, j, k, 0, 1, 1, leftF);
+				setCubie(cubicles[0][j][k], 0, 1, 1, leftF);
 			}
 		}
 
 		for (int j = 0; j < 3; j++) {
 			for (int i = 0; i < 3; i++) {
-				setCubie(i, j, 2, 1, 1, 2, backF);
+				setCubie(cubicles[i][j][2], 1, 1, 2, backF);
 			}
 		}
 
 		for (int k = 0; k < 3; k++) {
 			for (int i = 0; i < 3; i++) {
-				setCubie(i, 0, k, 1, 0, 1, upF);
+				setCubie(cubicles[i][0][k], 1, 0, 1, upF);
 			}
 		}
 
 		for (int k = 0; k < 3; k++) {
 			for (int i = 0; i < 3; i++) {
-				setCubie(i, 2, k, 1, 2, 1, downF);
+				setCubie(cubicles[i][2][k], 1, 2, 1, downF);
 			}
 		}
 
 	}
 
-	public static void setCubie(int i, int j, int k, int x, int y, int z, char color) {
-		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
-			if (CubeUtils.checkPointer(i, j, k, x, y, z, c) == true) {
-				cubicles[i][j][k].facelet[c].setColor(color);
+	private static void setCubie(Cubie tmpCubie, int x, int y, int z, char color) {
+		for (int c = 0; c < tmpCubie.facelet.length; c++) {
+			if (CubeUtils.checkPointer(tmpCubie.facelet[c], x, y, z) == true) {
+				tmpCubie.facelet[c].setColor(color);
 			}
 		}
 	}
@@ -243,31 +243,32 @@ public class RubiksCube {
 	public static void printCube() {
 
 		// prints the up face
-		printFace('t');
+		printFace('u');
 		System.out.println();
 
 		// prints the Rows in order: Front Right Back Left
 		for (int j = 0; j < 3; j++) {
 
 			for (int i = 0; i < 3; i++) {
-				printFaceletColor(i, j, 0, 1, 1, 0);
+				printFaceletColor(cubicles[i][j][0], 1, 1, 0);
 			}
 			System.out.print(" ");
 
 			for (int k = 0; k < 3; k++) {
-				printFaceletColor(2, j, k, 2, 1, 1);
+				printFaceletColor(cubicles[2][j][k], 2, 1, 1);
 			}
 			System.out.print(" ");
 
 			for (int i = 2; i > 0 - 1; i--) {
-				printFaceletColor(i, j, 2, 1, 1, 2);
+				printFaceletColor(cubicles[i][j][2], 1, 1, 2);
 			}
 			System.out.print(" ");
 
 			for (int k = 2; k > 0 - 1; k--) {
-				printFaceletColor(0, j, k, 0, 1, 1);
+				printFaceletColor(cubicles[0][j][k], 0, 1, 1);
 			}
 			System.out.println();
+			
 		}
 		System.out.println();
 
@@ -277,10 +278,11 @@ public class RubiksCube {
 
 	public static void printFace(char face) {
 		switch (face) {
+		
 		case 'f':
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
-					printFaceletColor(i, j, 0, 1, 1, 0);
+					printFaceletColor(cubicles[i][j][0], 1, 1, 0);
 				}
 				System.out.println();
 			}
@@ -289,7 +291,7 @@ public class RubiksCube {
 		case 'r':
 			for (int j = 0; j < 3; j++) {
 				for (int k = 0; k < 3; k++) {
-					printFaceletColor(2, j, k, 2, 1, 1);
+					printFaceletColor(cubicles[2][j][k], 2, 1, 1);
 				}
 				System.out.println();
 			}
@@ -298,7 +300,7 @@ public class RubiksCube {
 		case 'b':
 			for (int j = 0; j < 3; j++) {
 				for (int i = 2; i > 0 - 1; i--) {
-					printFaceletColor(i, j, 2, 1, 1, 2);
+					printFaceletColor(cubicles[i][j][2], 1, 1, 2);
 				}
 				System.out.println();
 			}
@@ -307,16 +309,16 @@ public class RubiksCube {
 		case 'l':
 			for (int j = 0; j < 3; j++) {
 				for (int k = 2; k > 0 - 1; k--) {
-					printFaceletColor(0, j, k, 0, 1, 1);
+					printFaceletColor(cubicles[0][j][k], 0, 1, 1);
 				}
 				System.out.println();
 			}
 			break;
 
-		case 't':
+		case 'u':
 			for (int k = 2; k > -1; k--) {
 				for (int i = 0; i < 3; i++) {
-					printFaceletColor(i, 0, k, 1, 0, 1);
+					printFaceletColor(cubicles[i][0][k], 1, 0, 1);
 				}
 				System.out.println();
 			}
@@ -325,7 +327,7 @@ public class RubiksCube {
 		case 'd':
 			for (int k = 0; k < 3; k++) {
 				for (int i = 0; i < 3; i++) {
-					printFaceletColor(i, 2, k, 1, 2, 1);
+					printFaceletColor(cubicles[i][2][k], 1, 2, 1);
 				}
 				System.out.println();
 			}
@@ -335,10 +337,10 @@ public class RubiksCube {
 
 	}
 
-	public static void printFaceletColor(int i, int j, int k, int x, int y, int z) {
-		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
-			if (CubeUtils.checkPointer(i, j, k, x, y, z, c) == true) {
-				System.out.print(cubicles[i][j][k].facelet[c].getColor());
+	private static void printFaceletColor(Cubie tmpCubie, int x, int y, int z) {
+		for (int c = 0; c < tmpCubie.facelet.length; c++) {
+			if (CubeUtils.checkPointer(tmpCubie.facelet[c], x, y, z) == true) {
+				System.out.print(tmpCubie.facelet[c].getColor());
 			}
 		}
 	}
