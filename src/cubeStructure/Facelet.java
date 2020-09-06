@@ -1,7 +1,7 @@
 package cubeStructure;
 
 public class Facelet {
-	char color;
+	private char color;
 	int[] pointer = new int[3];
 
 	public Facelet(char color, int x, int y, int z) {

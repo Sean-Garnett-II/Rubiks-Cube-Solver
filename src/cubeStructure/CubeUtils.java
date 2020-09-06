@@ -2,12 +2,27 @@ package cubeStructure;
 
 public class CubeUtils {
 
+	public CubeUtils() {
+
+	}
+
+	public static int[] findPointer(Cubie tmpCubie, char color) {
+		for (int c = 0; c < tmpCubie.facelet.length; c++) {
+			if (checkFaceletColor(tmpCubie.facelet[c], color)) {
+				return new int[] { tmpCubie.facelet[c].pointer[0], tmpCubie.facelet[c].pointer[1],
+						tmpCubie.facelet[c].pointer[2] };
+
+			}
+		}
+		return new int[] {};
+	}
+
 	public static int[] findCubie(char color) {
 
 		for (int k = 0; k < 3; k++) {
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
-					if (checkFacletColor(RubiksCube.cubicles[i][j][k].facelet[0], color) == true
+					if (checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[0], color) == true
 							&& RubiksCube.cubicles[i][j][k].facelet.length == 1) {
 						return new int[] { i, j, k };
 					}
@@ -24,8 +39,8 @@ public class CubeUtils {
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
 					if (RubiksCube.cubicles[i][j][k].facelet.length == 2
-							&& checkFacletColor(RubiksCube.cubicles[i][j][k].facelet[0], color1, color2) == true
-							&& checkFacletColor(RubiksCube.cubicles[i][j][k].facelet[1], color1, color2) == true) {
+							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[0], color1, color2) == true
+							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[1], color1, color2) == true) {
 
 						return new int[] { i, j, k };
 
@@ -33,6 +48,7 @@ public class CubeUtils {
 				}
 			}
 		}
+
 		return new int[] {};
 	}
 
@@ -41,9 +57,9 @@ public class CubeUtils {
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
 					if (RubiksCube.cubicles[i][j][k].facelet.length == 3
-							&& checkFacletColor(RubiksCube.cubicles[i][j][k].facelet[0], color1, color2, color3) == true
-							&& checkFacletColor(RubiksCube.cubicles[i][j][k].facelet[1], color1, color2, color3) == true
-							&& checkFacletColor(RubiksCube.cubicles[i][j][k].facelet[2], color1, color2,
+							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[0], color1, color2, color3) == true
+							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[1], color1, color2, color3) == true
+							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[2], color1, color2,
 									color3) == true) {
 
 						return new int[] { i, j, k };
@@ -55,7 +71,7 @@ public class CubeUtils {
 		return new int[] {};
 	}
 
-	public static boolean checkFacletColor(Facelet tmpFacelet, char color) {
+	public static boolean checkFaceletColor(Facelet tmpFacelet, char color) {
 		if (tmpFacelet.getColor() == color) {
 			return true;
 		} else {
@@ -64,8 +80,8 @@ public class CubeUtils {
 
 	}
 
-	public static boolean checkFacletColor(Facelet tmpFacelet, char color1, char color2) {
-		if (checkFacletColor(tmpFacelet, color1) || checkFacletColor(tmpFacelet, color2)) {
+	public static boolean checkFaceletColor(Facelet tmpFacelet, char color1, char color2) {
+		if (checkFaceletColor(tmpFacelet, color1) || checkFaceletColor(tmpFacelet, color2)) {
 			return true;
 		} else {
 			return false;
@@ -73,9 +89,9 @@ public class CubeUtils {
 
 	}
 
-	public static boolean checkFacletColor(Facelet tmpFacelet, char color1, char color2, char color3) {
-		if (checkFacletColor(tmpFacelet, color1) || checkFacletColor(tmpFacelet, color2)
-				|| checkFacletColor(tmpFacelet, color3)) {
+	public static boolean checkFaceletColor(Facelet tmpFacelet, char color1, char color2, char color3) {
+		if (checkFaceletColor(tmpFacelet, color1) || checkFaceletColor(tmpFacelet, color2)
+				|| checkFaceletColor(tmpFacelet, color3)) {
 			return true;
 		} else {
 			return false;
