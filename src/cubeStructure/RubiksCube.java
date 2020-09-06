@@ -7,7 +7,7 @@ public class RubiksCube {
 
 	public RubiksCube() {
 
-		// top right cubicle on the front face is index 0,0,0
+		// up right cubicle on the front face is index 0,0,0
 		// +x is right, +y is down, +z is into the cube
 		// the default facelet 'color' indicates what index that facelt is in its cubie
 		// center face cubies all have X
@@ -192,57 +192,57 @@ public class RubiksCube {
 
 	}
 
-	public static void setCube(char frontF, char rightF, char backF, char leftF, char topF, char downF) {
+	public static void setCube(char frontF, char rightF, char backF, char leftF, char upF, char downF) {
 
 		for (int j = 0; j < 3; j++) {
 			for (int i = 0; i < 3; i++) {
-				setFace(i, j, 0, 1, 1, 0, frontF);
+				setCubie(i, j, 0, 1, 1, 0, frontF);
 			}
 		}
 
 		for (int k = 0; k < 3; k++) {
 			for (int j = 0; j < 3; j++) {
-				setFace(2, j, k, 2, 1, 1, rightF);
+				setCubie(2, j, k, 2, 1, 1, rightF);
 			}
 		}
 
 		for (int k = 0; k < 3; k++) {
 			for (int j = 0; j < 3; j++) {
-				setFace(0, j, k, 0, 1, 1, leftF);
+				setCubie(0, j, k, 0, 1, 1, leftF);
 			}
 		}
 
 		for (int j = 0; j < 3; j++) {
 			for (int i = 0; i < 3; i++) {
-				setFace(i, j, 2, 1, 1, 2, backF);
+				setCubie(i, j, 2, 1, 1, 2, backF);
 			}
 		}
 
 		for (int k = 0; k < 3; k++) {
 			for (int i = 0; i < 3; i++) {
-				setFace(i, 0, k, 1, 0, 1, topF);
+				setCubie(i, 0, k, 1, 0, 1, upF);
 			}
 		}
 
 		for (int k = 0; k < 3; k++) {
 			for (int i = 0; i < 3; i++) {
-				setFace(i, 2, k, 1, 2, 1, downF);
+				setCubie(i, 2, k, 1, 2, 1, downF);
 			}
 		}
 
 	}
 
-	public static void setFace(int i, int j, int k, int x, int y, int z, char color) {
+	public static void setCubie(int i, int j, int k, int x, int y, int z, char color) {
 		for (int c = 0; c < (3 - i % 2 - j % 2 - k % 2); c++) {
 			if (CubeUtils.checkPointer(i, j, k, x, y, z, c) == true) {
 				cubicles[i][j][k].facelet[c].setColor(color);
 			}
 		}
 	}
-	
+
 	public static void printCube() {
 
-		// prints the top face
+		// prints the up face
 		printFace('t');
 		System.out.println();
 
@@ -274,7 +274,7 @@ public class RubiksCube {
 		// prints the Down (bottom) face
 		printFace('d');
 	}
-	
+
 	public static void printFace(char face) {
 		switch (face) {
 		case 'f':

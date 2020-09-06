@@ -53,7 +53,7 @@ public class CubeUtils {
 		}
 	}
 
-	public static boolean checkPointer(int i, int j, int k, int x, int y, int z, int c) {
+	public static boolean checkPointer(int i, int j, int k,  int x, int y, int z, int c) {
 		if (RubiksCube.cubicles[i][j][k].facelet[c].pointer[0] == x && RubiksCube.cubicles[i][j][k].facelet[c].pointer[1] == y
 				&& RubiksCube.cubicles[i][j][k].facelet[c].pointer[2] == z) {
 			return true;

@@ -5,8 +5,8 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
-		RubiksCube.setCube('f', 'r', 'b', 'l', 'p', 'd');
 		RubiksCube.printCube();
+		RubiksCube.setCube('f', 'r', 'b', 'l', 'p', 'd');
 
 		int[] array = CubeUtils.findCubie('f', 'r');
 
