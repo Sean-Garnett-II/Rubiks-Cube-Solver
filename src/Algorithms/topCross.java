@@ -51,10 +51,8 @@ public class topCross {
 		case 2:
 			if (cubicleIndex[0] == 1 && cubicleIndex[1] == 2 && cubicleIndex[2] == 0) {
 				RubiksCube.rotate(1, 1, 0, 1);
-				System.out.println("rotated case2 if==t");
 			} else {
 				RubiksCube.move("d", 1);
-				System.out.println("rotated in else clause");
 			}
 			break;
 
