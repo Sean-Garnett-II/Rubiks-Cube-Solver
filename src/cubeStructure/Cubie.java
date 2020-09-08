@@ -4,7 +4,7 @@ public class Cubie {
 	Facelet[] facelet;
 
 	public Cubie() {
-
+		facelet = null;
 	}
 
 	public Cubie(Facelet facelet1) {

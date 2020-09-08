@@ -6,6 +6,8 @@ public class CubeUtils {
 
 	}
 
+	// finds the facelet in a cubie that has the given color/colors and returns the
+	// pointer.
 	public static int[] findPointer(Cubie tmpCubie, char color) {
 		for (int c = 0; c < tmpCubie.facelet.length; c++) {
 			if (checkFaceletColor(tmpCubie.facelet[c], color)) {
@@ -17,6 +19,7 @@ public class CubeUtils {
 		return new int[] {};
 	}
 
+	// finds the cubicle index number of a cubie that matches the colors given
 	public static int[] findCubie(char color) {
 
 		for (int k = 0; k < 3; k++) {
@@ -38,13 +41,17 @@ public class CubeUtils {
 		for (int k = 0; k < 3; k++) {
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
-					if (RubiksCube.cubicles[i][j][k].facelet.length == 2
-							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[0], color1, color2) == true
-							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[1], color1, color2) == true) {
 
-						return new int[] { i, j, k };
+					if (RubiksCube.cubicles[i][j][k].facelet != null) {
+						if (RubiksCube.cubicles[i][j][k].facelet.length == 2
+								&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[0], color1, color2) == true
+								&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[1], color1, color2) == true) {
 
+							return new int[] { i, j, k };
+
+						}
 					}
+
 				}
 			}
 		}
@@ -57,8 +64,10 @@ public class CubeUtils {
 			for (int j = 0; j < 3; j++) {
 				for (int i = 0; i < 3; i++) {
 					if (RubiksCube.cubicles[i][j][k].facelet.length == 3
-							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[0], color1, color2, color3) == true
-							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[1], color1, color2, color3) == true
+							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[0], color1, color2,
+									color3) == true
+							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[1], color1, color2,
+									color3) == true
 							&& checkFaceletColor(RubiksCube.cubicles[i][j][k].facelet[2], color1, color2,
 									color3) == true) {
 
@@ -98,6 +107,7 @@ public class CubeUtils {
 		}
 	}
 
+	// checks the given facelets pointer to the given pointer info
 	public static boolean checkPointer(Facelet tmpFacelet, int x, int y, int z) {
 		if (tmpFacelet.pointer[0] == x && tmpFacelet.pointer[1] == y && tmpFacelet.pointer[2] == z) {
 			return true;

@@ -3,7 +3,7 @@ package cubeStructure;
 // TODO write a way to input a cube state
 
 public class RubiksCube {
-	static Cubie[][][] cubicles = new Cubie[3][3][3];
+	public static Cubie[][][] cubicles = new Cubie[3][3][3];
 
 	public RubiksCube() {
 
@@ -92,7 +92,7 @@ public class RubiksCube {
 
 	}
 
-	private static void rotate(int x, int y, int z, int orientation) {
+	public static void rotate(int x, int y, int z, int orientation) {
 		// rotates a face given its home plate coordiantes.
 		// the rotation follows positive orientation for the cube (think right hand
 		// rule)
@@ -274,6 +274,7 @@ public class RubiksCube {
 
 		// prints the Down (bottom) face
 		printFace('d');
+		System.out.println();
 	}
 
 	public static void printFace(char face) {
