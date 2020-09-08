@@ -10,9 +10,15 @@ public class Main {
 		RubiksCube.setCube('f', 'r', 'b', 'l', 'u', 'd');
 
 
-		RubiksCube.move("f f d", 1);
+		RubiksCube.move("f r b l", 1);
 		RubiksCube.printCube();
 		Algorithms.topCross.setTarget('f');
+		RubiksCube.printCube();
+		Algorithms.topCross.setTarget('r');
+		RubiksCube.printCube();
+		Algorithms.topCross.setTarget('b');
+		RubiksCube.printCube();
+		Algorithms.topCross.setTarget('l');
 		RubiksCube.printCube();
 		
 

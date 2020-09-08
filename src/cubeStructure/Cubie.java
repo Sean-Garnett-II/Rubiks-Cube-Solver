@@ -1,7 +1,7 @@
 package cubeStructure;
 
 public class Cubie {
-	Facelet[] facelet;
+	public Facelet[] facelet;
 
 	public Cubie() {
 		facelet = null;
